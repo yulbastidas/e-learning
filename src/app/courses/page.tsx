@@ -1,12 +1,11 @@
 'use client';
-import React, { useState, useEffect } from 'react';
-
-
+import React, { useState, useEffect, useMemo } from 'react';
+import Image from 'next/image';
 import { courses } from '../data/courses';
 
 const CourseFilters = ({ onFilterChange }: { onFilterChange: (filter: string, value: string) => void }) => {
-  const categories = [...new Set(courses.map(course => course.category))];
-  const levels = [...new Set(courses.map(course => course.level))];
+  const categories = useMemo(() => [...new Set(courses.map(course => course.category))], []);
+  const levels = useMemo(() => [...new Set(courses.map(course => course.level))], []);
 
   return (
     <section className="flex flex-wrap justify-center gap-4 mb-8">
@@ -104,10 +103,10 @@ const SudokuGame = () => {
 };
 
 const MemoryGame = () => {
-  const animals = [
+  const animals = useMemo(() => [
     '🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼',
     '🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼'
-  ];
+  ], []);
 
   const [flipped, setFlipped] = useState<boolean[]>(Array(16).fill(false));
   const [matched, setMatched] = useState<boolean[]>(Array(16).fill(false));
@@ -117,7 +116,7 @@ const MemoryGame = () => {
   useEffect(() => {
     const shuffled = [...animals].sort(() => Math.random() - 0.5);
     setShuffledCards(shuffled);
-  }, []);
+  }, [animals]);
 
   const handleCardClick = (index: number) => {
     if (flipped[index] || matched[index] || flippedCards.length === 2) return;
@@ -355,10 +354,13 @@ export default function CoursesPage() {
                   className="p-6 bg-white rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-gray-100"
                 >
                   <figure className="relative h-48 overflow-hidden rounded-lg mb-4">
-                    <img 
-                      src={course.image} 
-                      alt={course.title} 
+                    <Image
+                      src={course.image}
+                      alt={course.title}
+                      width={300}
+                      height={200}
                       className="w-full h-full object-contain"
+                      priority={false}
                     />
                   </figure>
                   <h3 className="text-2xl font-semibold text-blue-600 mb-2">{course.title}</h3>

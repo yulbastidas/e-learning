@@ -1,5 +1,4 @@
-"use client";
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 
 interface User {
   name: string;
@@ -17,12 +16,21 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [users, setUsers] = useState<User[]>([]); 
+  const [users, setUsers] = useState<User[]>([]);
+
+  
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
 
   const login = (email: string, password: string) => {
     const existingUser = users.find((u) => u.email === email);
     if (existingUser) {
       setUser(existingUser);
+      localStorage.setItem("user", JSON.stringify(existingUser));  
       return true;
     }
     return false;
@@ -32,8 +40,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const userExists = users.some((u) => u.email === email);
     if (!userExists) {
       const newUser = { name, email };
-      setUsers([...users, newUser]); 
+      setUsers([...users, newUser]);
       setUser(newUser);
+      localStorage.setItem("user", JSON.stringify(newUser));  
       return true;
     }
     return false;
@@ -41,6 +50,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = () => {
     setUser(null);
+    localStorage.removeItem("user");  
   };
 
   return (

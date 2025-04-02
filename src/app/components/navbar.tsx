@@ -2,13 +2,13 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { useAuth } from "../context/AuthContext"
-import { Menu, X, LogOut, User, BookOpen, Info, Rocket, Sparkles } from "lucide-react"
+import { Menu, X, LogOut, BookOpen, Info, Rocket, Sparkles } from "lucide-react"
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const auth = useAuth()
-  const user = auth?.user
+  const user = auth?.user 
   const logout = auth?.logout
 
   useEffect(() => {
@@ -25,11 +25,9 @@ export default function Navbar() {
 
   return (
     <>
-      {}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-2' : 'bg-white/95 backdrop-blur-sm py-4'}`}>
         <section className="max-w-7xl mx-auto px-6">
           <section className="flex justify-between items-center">
-            {}
             <Link href="/" className="flex items-center group relative">
               <figure className="relative mr-4">
                 <span className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-500 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition-all duration-300" />
@@ -43,7 +41,6 @@ export default function Navbar() {
               <Sparkles className="absolute -right-4 -top-2 w-4 h-4 text-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-twinkle" />
             </Link>
 
-            {}
             <section className="hidden md:flex items-center space-x-10">
               <nav className="flex items-center space-x-8">
                 <Link 
@@ -103,7 +100,6 @@ export default function Navbar() {
               )}
             </section>
 
-            {}
             <button 
               className="md:hidden w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-full hover:bg-gray-50 transition-all duration-300 shadow-sm"
               onClick={toggleMenu}
@@ -120,12 +116,10 @@ export default function Navbar() {
         </section>
       </nav>
 
-      {}
       {isMenuOpen && (
         <div className="fixed inset-0 z-40 mt-20 bg-black/10 backdrop-blur-sm" onClick={toggleMenu} />
       )}
 
-      {}
       {isMenuOpen && (
         <section className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 w-[calc(100%-3rem)] max-w-md md:hidden py-6 px-6 bg-white rounded-xl shadow-xl border border-gray-100 animate-fadeIn">
           <nav className="flex flex-col space-y-6">
@@ -190,7 +184,6 @@ export default function Navbar() {
         </section>
       )}
 
-      {}
       <div className={`h-20 transition-all duration-500 ${scrolled ? 'h-16' : 'h-20'}`} />
     </>
   )

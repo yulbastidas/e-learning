@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import React from 'react';
 import { BookOpen, Palette, Music, Brain, Star, ChevronRight, Heart, Gamepad2, Sparkles } from 'lucide-react';
 

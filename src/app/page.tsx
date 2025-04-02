@@ -39,6 +39,8 @@ const activities = [
   }
 ];
 
+
+
 function App() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-yellow-50 to-pink-50">
@@ -68,7 +70,7 @@ function App() {
           </section>
 
           <section className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-20">
-            {[
+            {[ 
               { number: "1000+", label: "Juegos Educativos", icon: <Gamepad2 className="w-8 h-8 text-purple-500 group-hover:animate-bounce" /> },
               { number: "50+", label: "Aventuras de Aprendizaje", icon: <Star className="w-8 h-8 text-yellow-500 group-hover:animate-pulse" /> },
               { number: "5.0", label: "Diversión Garantizada", icon: <Heart className="w-8 h-8 text-pink-500 group-hover:animate-ping" /> }
@@ -106,10 +108,12 @@ function App() {
                 className="bg-white rounded-3xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border-4 border-purple-100 hover:border-pink-300 group"
               >
                 <figure className="relative h-48 overflow-hidden">
-                  <img 
+                  <Image 
                     src={activity.image} 
-                    alt={activity.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    alt={activity.title} 
+                    layout="fill" 
+                    objectFit="cover" 
+                    className="transition-transform duration-500 group-hover:scale-110"
                   />
                   <span className="absolute inset-0 bg-gradient-to-t from-purple-900/30 to-transparent"></span>
                 </figure>

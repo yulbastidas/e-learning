@@ -1,6 +1,5 @@
-// next.config.js
 module.exports = {
   images: {
-    domains: ['images.pexels.com'], // Agregar el dominio de Pexels
+    domains: ['images.pexels.com', 'images.unsplash.com'], 
   },
 }

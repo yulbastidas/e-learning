@@ -2,8 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import { Lock, Mail, LogIn } from "lucide-react";
+import { useAuth } from "../context/AuthContext"; 
 
 function LoginForm() {
+  const { login } = useAuth(); 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -13,20 +15,24 @@ function LoginForm() {
     setIsClient(true);
   }, []);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     const trimmedEmail = email.trim();
     const trimmedPassword = password.trim();
 
-    if (trimmedEmail === "test@test.com" && trimmedPassword === "password") {
-      setError("");
+    
+    const isLoggedIn = login(trimmedEmail, trimmedPassword);
+
+    if (isLoggedIn) {
+      setError(""); 
+      
     } else {
       setError("Credenciales incorrectas.");
     }
   };
 
   if (!isClient) {
-    return null; 
+    return null;
   }
 
   return (
